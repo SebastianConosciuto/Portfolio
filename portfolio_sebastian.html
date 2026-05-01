@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sebastián Gonzalez Conosciuto — Desarrollador Fullstack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #071526;
+      --navy2: #0d2040;
+      --blue: #1560bd;
+      --blue-bright: #2176d9;
+      --cyan: #00c4e0;
+      --cyan-dim: rgba(0,196,224,0.12);
+      --white: #f4f8ff;
+      --grey: #8fa0b8;
+      --border: rgba(33,118,217,0.2);
+      --card: rgba(13,32,64,0.55);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── GRID BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(33,118,217,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(33,118,217,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── GLOW ORBS ─── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--blue); top: -200px; left: -100px; }
+    .orb-2 { width: 400px; height: 400px; background: var(--cyan); bottom: 0; right: -100px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 4rem;
+      background: rgba(7,21,38,0.7);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--cyan); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul li a {
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover { color: var(--cyan); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: var(--white) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 6px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--blue-bright) !important; color: var(--white) !important; }
+
+    /* ─── SECTIONS ─── */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 8rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--cyan-dim);
+      border: 1px solid rgba(0,196,224,0.3);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero-name .accent { color: var(--cyan); }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 600;
+      color: var(--grey);
+      margin-top: 0.8rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-title span {
+      color: var(--white);
+    }
+
+    .hero-desc {
+      max-width: 580px;
+      font-size: 1.05rem;
+      color: var(--grey);
+      margin-top: 1.5rem;
+      line-height: 1.8;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      border: 1px solid var(--blue);
+    }
+    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    .hero-meta {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+    .hero-meta-item { text-align: left; }
+    .hero-meta-item .val {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .hero-meta-item .val span { color: var(--cyan); }
+    .hero-meta-item .label {
+      font-size: 0.78rem;
+      color: var(--grey);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── SECTION HEADINGS ─── */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--cyan);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-4px);
+    }
+
+    .skill-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      background: rgba(33,118,217,0.15);
+      border: 1px solid rgba(33,118,217,0.3);
+      color: var(--white);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 100px;
+      font-family: 'DM Mono', monospace;
+    }
+    .tag.highlight {
+      background: var(--cyan-dim);
+      border-color: rgba(0,196,224,0.4);
+      color: var(--cyan);
+    }
+
+    /* ─── EXPERIENCE ─── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--cyan), var(--blue), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-role {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+    .timeline-company {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .timeline-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--grey);
+      white-space: nowrap;
+      padding: 0.2rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+
+    .timeline-body {
+      color: #9fb2cc;
+      font-size: 0.95rem;
+    }
+
+    .timeline-body ul {
+      list-style: none;
+      margin-top: 0.6rem;
+    }
+    .timeline-body ul li {
+      padding: 0.3rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .timeline-body ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-size: 0.8rem;
+    }
+
+    /* ─── PROJECTS ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .project-card:hover {
+      border-color: var(--blue-bright);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(21,96,189,0.2);
+    }
+
+    .project-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .project-icon {
+      font-size: 2rem;
+    }
+
+    .project-link {
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+    .project-link:hover { color: var(--cyan); }
+
+    .project-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+
+    .project-card p {
+      color: #8fa0b8;
+      font-size: 0.9rem;
+      flex: 1;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .project-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .project-btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      border: 1px solid var(--blue);
+    }
+    .project-btn-primary:hover {
+      background: var(--blue-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(33,118,217,0.35);
+    }
+    .project-btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+    .project-btn-ghost:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* ─── AI TOOLS ─── */
+    .ai-section {
+      background: linear-gradient(135deg, rgba(13,32,64,0.8), rgba(7,21,38,0.9));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .ai-section::before {
+      content: 'AI';
+      position: absolute;
+      right: -1rem;
+      top: -2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10rem;
+      font-weight: 800;
+      color: rgba(0,196,224,0.04);
+      pointer-events: none;
+    }
+
+    .ai-tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .ai-tool {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.1rem;
+      background: rgba(0,196,224,0.08);
+      border: 1px solid rgba(0,196,224,0.25);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--white);
+      transition: all 0.2s;
+    }
+    .ai-tool:hover {
+      background: rgba(0,196,224,0.15);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .ai-tool-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+
+    /* ─── COMPETENCIAS ─── */
+    .competencias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .comp-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 1.2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: #9fb2cc;
+    }
+    .comp-item span:first-child {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+    .edu-card .edu-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+    .edu-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .edu-card p {
+      color: var(--grey);
+      font-size: 0.85rem;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      text-align: center;
+    }
+
+    .contact-card {
+      background: linear-gradient(135deg, var(--blue) 0%, #0d2040 100%);
+      border-radius: 20px;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-radius: 19px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+      pointer-events: none;
+    }
+
+    .contact-card h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-card p {
+      color: rgba(244,248,255,0.7);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      backdrop-filter: blur(6px);
+    }
+    .contact-link:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    .contact-link.primary {
+      background: var(--white);
+      color: var(--navy);
+      border-color: var(--white);
+    }
+    .contact-link.primary:hover {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: var(--navy);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      color: var(--grey);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+    footer span { color: var(--cyan); }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0 auto;
+      max-width: 1100px;
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1rem; }
+      nav ul li:not(:last-child) { display: none; }
+      section { padding: 4rem 1.2rem; }
+      .hero-meta { gap: 1.5rem; }
+      .ai-section { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SGC<span>.</span></div>
+  <ul>
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#habilidades">Habilidades</a></li>
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#contact" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">Disponible para incorporarme</div>
+  <h1 class="hero-name">
+    Sebastián<br>Gonzalez<br><span class="accent">Conosciuto</span>
+  </h1>
+  <p class="hero-title">
+    <span>Desarrollador Fullstack</span> con Enfoque IA
+  </p>
+  <p class="hero-desc">
+    Diseñador UI/UX y desarrollador web fullstack orientado a construir soluciones digitales simples, mantenibles y funcionales. Interesado en la modernización de la gestión pública y la innovación municipal mediante tecnología.
+  </p>
+  <div class="hero-actions">
+    <a href="mailto:conosciutosebastian@gmail.com" class="btn btn-primary">
+      ✉ Enviar mensaje
+    </a>
+    <a href="https://github.com/SebastianConosciuto" target="_blank" class="btn btn-ghost">
+      ⌥ Ver proyectos
+    </a>
+  </div>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="val">6<span>+</span></div>
+      <div class="label">Proyectos reales</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="val">1<span>+</span></div>
+      <div class="label">Año de experiencia</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="val">SN<span>A</span></div>
+      <div class="label">San Nicolás de los Arroyos</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOBRE MÍ / IA -->
+<section id="sobre-mi">
+  <div class="reveal">
+    <div class="section-label">// Sobre mí</div>
+    <h2 class="section-title">Diseño que funciona.<br>Código que perdura.</h2>
+  </div>
+  <div class="reveal" style="transition-delay:0.1s">
+    <div class="ai-section">
+      <div class="section-label">// Herramientas de IA que utilizo</div>
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:0.4rem;">Integración de IA al desarrollo</h3>
+      <p style="color:var(--grey);font-size:0.95rem;max-width:600px;">
+        Incorporo herramientas de inteligencia artificial en todo el ciclo de desarrollo: desde la generación y revisión de código hasta la documentación automática, testing y mejora continua de sistemas.
+      </p>
+      <div class="ai-tools-grid">
+        <div class="ai-tool"><span class="ai-tool-dot"></span> Claude Code (+ Skills, Plugins, MCP Servers, Subagents)</div>
+        <div class="ai-tool"><span class="ai-tool-dot"></span> GitHub Copilot</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HABILIDADES -->
+<section id="habilidades">
+  <div class="reveal">
+    <div class="section-label">// Habilidades técnicas</div>
+    <h2 class="section-title">Stack completo,<br>de la UI a la DB.</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal" style="transition-delay:0.05s">
+      <div class="skill-card-icon">🎨</div>
+      <h3>Frontend</h3>
+      <div class="skill-tags">
+        <span class="tag highlight">React.js</span>
+        <span class="tag highlight">Next.js</span>
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">Tailwind</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Redux</span>
+        <span class="tag">TypeScript</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.1s">
+      <div class="skill-card-icon">⚙️</div>
+      <h3>Backend</h3>
+      <div class="skill-tags">
+        <span class="tag highlight">Node.js</span>
+        <span class="tag highlight">Express</span>
+        <span class="tag">Python</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">PostgreSQL</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.15s">
+      <div class="skill-card-icon">🖌️</div>
+      <h3>Diseño UI/UX</h3>
+      <div class="skill-tags">
+        <span class="tag highlight">Figma</span>
+        <span class="tag">Prototipado</span>
+        <span class="tag">Wireframes</span>
+        <span class="tag">Design System</span>
+        <span class="tag">User Flows</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay:0.2s">
+      <div class="skill-card-icon">🛠️</div>
+      <h3>Herramientas</h3>
+      <div class="skill-tags">
+        <span class="tag highlight">Git</span>
+        <span class="tag">Vercel</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">Google Apps Script</span>
+        <span class="tag">Google Workspace</span>
+        <span class="tag">Paquete Office</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+  <div class="reveal">
+    <div class="section-label">// Experiencia laboral</div>
+  </div>
+  <div class="timeline reveal" style="transition-delay:0.1s">
+    <div class="timeline-item">
+      <div class="timeline-head">
+        <div>
+          <div class="timeline-role">Diseñador UX/UI & Desarrollador Frontend Jr.</div>
+          <div class="timeline-company">Anorak — Proyectos Freelance</div>
+        </div>
+        <div class="timeline-date">Jun 2025 → Abril 2026</div>
+      </div>
+      <div class="timeline-body">
+        <p>Diseño y desarrollo de un plugin complejo para la plataforma <strong>Auravant</strong>, orientado a aseguradoras del sector agropecuario.</p>
+        <ul>
+          <li>Sistema de gestión de siniestros: revisión de casos, asignación de tickets, análisis detallado y visualización de pólizas por zona asegurada.</li>
+          <li>Interfaces diferenciadas por rol de usuario (Usuario, Analista, Administrador) con flujos adaptados.</li>
+          <li>Tres extensiones especializadas para análisis de tipos de siniestro: sequías, heladas y granizos.</li>
+          <li>Wireframes de alta fidelidad en Figma, navegación entre pantallas y arquitectura de la información.</li>
+          <li>Guía de estilos para proyectos futuros de la empresa.</li>
+          <li>Desarrollo frontend con JavaScript, React, Redux, AG Grid, Tablestack y Recharts.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-head">
+        <div>
+          <div class="timeline-role">Voluntario</div>
+          <div class="timeline-company">Uniendo Metas — Asociación Conciencia</div>
+        </div>
+        <div class="timeline-date">Mar 2024 → Actualidad</div>
+      </div>
+      <div class="timeline-body">
+        <ul>
+          <li>Automatización de procesos administrativos en Google Sheets mediante Apps Script.</li>
+          <li>Organización de eventos presenciales de hasta 400 personas.</li>
+          <li>Relevamiento, gestión y seguimiento de datos de participantes e inscripciones.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+  <div class="reveal">
+    <div class="section-label">// Proyectos destacados</div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal" style="transition-delay:0.05s">
+      <div class="project-card-top">
+        <div class="project-icon">🎟️</div>
+      </div>
+      <h3>Tykkera</h3>
+      <p>Aplicación web para gestión de turnos y emisión de tickets para profesionales. Stack fullstack con autenticación y despliegue en producción.</p>
+      <div class="skill-tags">
+        <span class="tag">MongoDB</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Vercel</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:0.1s">
+      <div class="project-card-top">
+        <div class="project-icon">🎮</div>
+      </div>
+      <h3>PokeAPI App</h3>
+      <p>Aplicación web con datos de Pokémon desde una API externa, minijuego de captura con quicktime events y sistema de progresión por nivel.</p>
+      <div class="skill-tags">
+        <span class="tag">React.js</span>
+        <span class="tag">Redux</span>
+        <span class="tag">Python</span>
+        <span class="tag">Supabase</span>
+      </div>
+      <div class="project-actions">
+        <a href="http://pokeapi.apps.orquesta.consulting" target="_blank" rel="noopener" class="project-btn project-btn-primary">
+          🚀 Ver proyecto
+        </a>
+        <a href="https://github.com/SebastianConosciuto" target="_blank" rel="noopener" class="project-btn project-btn-ghost">
+          ⌥ GitHub
+        </a>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:0.15s">
+      <div class="project-card-top">
+        <div class="project-icon">💸</div>
+      </div>
+      <h3>DonateApp</h3>
+      <p>Diseño de plataforma para empresas que permite a empleados donar fondos corporativos a ONGs, con flujos claros y diseño visual refinado.</p>
+      <div class="skill-tags">
+        <span class="tag">Figma</span>
+        <span class="tag">UI/UX</span>
+        <span class="tag">Prototipado</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:0.15s">
+      <div class="project-card-top">
+        <div class="project-icon">💸</div>
+      </div>
+      <h3>Gestor de Siniestros</h3>
+      <p>Diseño y desarrollo de plataforma para la gestión de casos de siniestros en el ámbito de seguros agropecuarios.</p>
+      <div class="skill-tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">Redux</span>
+        <span class="tag">React.js</span>
+        <span class="tag">UI/UX</span>
+        <span class="tag">Figma</span>
+        <span class="tag">Prototipado</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:0.15s">
+      <div class="project-card-top">
+        <div class="project-icon">🌧️</div>
+      </div>
+      <h3>Análisis de Granizo</h3>
+      <p>Diseño y desarrollo de plataforma para el análisis de eventos climáticos involucrando precipitaciones en el ámbito agropecuario.</p>
+      <div class="skill-tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">Redux</span>
+        <span class="tag">React.js</span>
+        <span class="tag">Recharts.js</span>
+        <span class="tag">Tablestock.js</span>
+        <span class="tag">Figma</span>
+        <span class="tag">UI/UX</span>
+        <span class="tag">Prototipado</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:0.15s">
+      <div class="project-card-top">
+        <div class="project-icon">🧊</div>
+      </div>
+      <h3>Análisis de Heladas</h3>
+      <p>Diseño y desarrollo de plataforma para el análisis de eventos climáticos involucrando heladas según altimetria en el ámbito agropecuario.</p>
+      <div class="skill-tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">Redux</span>
+        <span class="tag">React.js</span>
+        <span class="tag">Recharts.js</span>
+        <span class="tag">Tablestock.js</span>
+        <span class="tag">Figma</span>
+        <span class="tag">UI/UX</span>
+        <span class="tag">Prototipado</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal" style="transition-delay:0.15s">
+      <div class="project-card-top">
+        <div class="project-icon">🌾</div>
+      </div> 
+      <h3>Gestor de Cúmulos</h3>
+      <p>Diseño de plataforma para la gestión de limites asegurados en el ámbito agropecuario.</p>
+      <div class="skill-tags">
+        <span class="tag">Figma</span>
+        <span class="tag">UI/UX</span>
+        <span class="tag">Prototipado</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPETENCIAS -->
+<section id="competencias">
+  <div class="reveal">
+    <div class="section-label">// Competencias blandas</div>
+    <h2 class="section-title">Más allá del código.</h2>
+  </div>
+  <div class="competencias-grid reveal" style="transition-delay:0.1s">
+    <div class="comp-item"><span>🎯</span><span>Perfil resolutivo, proactivo y orientado a resultados</span></div>
+    <div class="comp-item"><span>⚡</span><span>Criterio para priorizar soluciones simples, mantenibles y eficientes</span></div>
+    <div class="comp-item"><span>🔍</span><span>Autonomía para investigar, proponer y ejecutar mejoras</span></div>
+    <div class="comp-item"><span>💡</span><span>Interés genuino por la innovación pública y la transformación digital del Estado</span></div>
+    <div class="comp-item"><span>🗣️</span><span>Buena comunicación con usuarios no técnicos</span></div>
+    <div class="comp-item"><span>📚</span><span>Aprendizaje rápido y adaptación a distintos entornos</span></div>
+    <div class="comp-item"><span>🤝</span><span>Trabajo en equipo con perfiles técnicos, funcionales y de gestión</span></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCACIÓN -->
+<section id="educacion">
+  <div class="reveal">
+    <div class="section-label">// Formación</div>
+    <h2 class="section-title">Siempre<br>aprendiendo.</h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card reveal" style="transition-delay:0.05s">
+      <div class="edu-year">2025 · Udemy</div>
+      <h3>Curso Diseño UI: Diseño visual y de interfaz con Figma</h3>
+      <p>16.5 h de teoría + 30 h de proyecto. Certificado emitido el 21/07/2025.</p>
+    </div>
+    <div class="edu-card reveal" style="transition-delay:0.1s">
+      <div class="edu-year">SoyHenry Bootcamp</div>
+      <h3>Bootcamp Intensivo Fullstack Developer</h3>
+      <p>JavaScript, React.js, Node.js, MongoDB, Next.js, Redux. Formación intensiva orientada a proyectos reales.</p>
+    </div>
+    <div class="edu-card reveal" style="transition-delay:0.15s">
+      <div class="edu-year">2016 – 2021</div>
+      <h3>Bachiller en Ciencias Naturales</h3>
+      <p>Secundaria N°12 Rafael Obligado, San Nicolás de los Arroyos.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-card reveal">
+    <h2>¿Nos conocemos?</h2>
+    <p>Disponible para incorporarme de forma remota y presencial en San Nicolás de los Arroyos.</p>
+    <div class="contact-links">
+      <a href="mailto:conosciutosebastian@gmail.com" class="contact-link primary">
+        ✉ conosciutosebastian@gmail.com
+      </a>
+      <a href="tel:+543364297859" class="contact-link">
+        📞 +54 336 429 7859
+      </a>
+      <a href="https://www.linkedin.com/in/sebastian-gonzalez-conosciuto/" target="_blank" class="contact-link">
+        in LinkedIn
+      </a>
+      <a href="https://github.com/SebastianConosciuto" target="_blank" class="contact-link">
+        ⌥ GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Hecho con propósito · <span>Sebastián Gonzalez Conosciuto</span> · 2026
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
